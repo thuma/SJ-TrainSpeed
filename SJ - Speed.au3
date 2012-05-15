@@ -1,7 +1,8 @@
+; Include extra au3 info.
 #include <GUIConstantsEx.au3>
 #include <StaticConstants.au3>
 
-
+; Create GUI
 Opt("GUIOnEventMode", 1)
 GUICreate("SJ Speed", 120, 60)
 $baar = GUICtrlCreateProgress ( 10, 10, 100, 20)
@@ -10,17 +11,22 @@ GUICtrlSetData($baar, "0")
 GUISetState(@SW_SHOW)
 GUISetOnEvent($GUI_EVENT_CLOSE, "Stang")
 
+; Exit if close
 Func Stang()
     Exit
 EndFunc
 
+; Main function loop
 While 1
+; Get onboard page with data and convert to string.
 $data = InetRead ("http://www.ombord.info/api/xml/position/", 1)
 $data = BinaryToString($data)
-#$data = '<position><time type="double">1337091456</time><latitude type="double">55.609523</latitude><longitude type="double">13.002023</longitude><altitude type="double">4.9</altitude><speed type="double">50.0</speed><cmg type="double">0.0</cmg><satellites type="integer">11</satellites></position>'
+; Split out the speed data (the data is resported in m/s):
 $datadelar = StringSplit ($data, "</speed>",1)
 $datadelar2 = StringSplit ($datadelar[1] , '<speed type="double">',1)
+; Update the data in the GUI.
 GUICtrlSetData($baar, Int(Number($datadelar2[2])*1.8))
 GUICtrlSetData($text, Int(Number($datadelar2[2])*3.6) & " Km/h")
+; Sleep for 2 sec before next fetch.
 sleep(2000)
 WEnd
