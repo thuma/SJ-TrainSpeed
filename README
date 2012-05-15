@@ -1,51 +1,13 @@
-European train price scraper.
-
-The european train companies tried 
-to acceave a common webbooking system.
-They failed, officialy due to techical reasons.
-
-This is a project to bridge the current gap
-between different companies.
+This software will show the speed of any SJ 2000
+train that you might travel on. The data is 
+retreaved from the onboard site. API information 
+is found on: 
+http://tagtider.net/blogg/utveckling/internet-ombord-api-med-tagkoordinater/
 
 ====================================================
-                      Target
+                      Installation
 ====================================================
-1. To create applications that get the price
-for all trains i europe. And present the data 
-in XML.
+1. Run the "SJ - Speed.exe"
+2. You are done. 
 
-2. Create a application that can show the timetables
-with the current price (recevaed from the 1.apps).
-This app should have links to the booking pages 
-for the company that is selling the selected trip.
 
-3. Create a application that can do as 2. and
-that can allso do all the booking for you.
-
-====================================================
-              Application arcitecture
-====================================================
-One app for each company.
-Price data should be presented in a xml:
-<ticket>
-  <trainnumber>455</trainnumber>
-  <deparaturedate>2011-10-11</deparaturedate>
-  <deparaturestation>SE,Lund C</deparaturestation>
-  <arrivalstation>DK,Copenhagen</arrivalstation>
-  <price>600</price>
-  <currency>SEK</currency>
-</ticket>
-The application should get all data 
-that it needs to calculate the price from a XML:
-<tripdata>
-  <traveler>
-    <age>43</age>
-    <country>SE</contry>
-    etc....
-  </trveler>
-  <from></from>
-  <to></to>
-  <deparaturedate>YYYY-MM-DD</deparaturedate>
-  <deparaturetime>HH:MM<deparaturetime>
-  <trainnumber>455</trainnumber>
-</tripdata>
