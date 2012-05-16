@@ -12,17 +12,3 @@ computer is not connected to the onboard SJ wifi.
 1. Run the "SJ - Speed.exe"
 2. You are done. 
 3. Close with the cross.
-
-Detta program visar hastigheten på alla SJ 2000
-som du råkar resa med. Datan är hämtad från sj 
-ombord sidan. API information finns på adressen:
-http://tagtider.net/blogg/utveckling/internet-ombord-api-med-tagkoordinater/
-Programmet visar fel hastighete om datorn inte är
-ansluten till det trålösa nätverket på tåget.
-
-====================================================
-                      Installation
-====================================================
-1. Ladda ner och kör "SJ - Speed.exe"
-2. Klart!
-3. Stäng med krysset. 
