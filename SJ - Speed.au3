@@ -1,4 +1,5 @@
-; Include extra au3 info.
+#AutoIt3Wrapper_icon=train.ico
+;Include extra au3 info.
 #include <GUIConstantsEx.au3>
 #include <StaticConstants.au3>
 
