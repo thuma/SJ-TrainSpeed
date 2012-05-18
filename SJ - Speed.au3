@@ -17,6 +17,20 @@ Func Stang()
     Exit
 EndFunc
 
+While 1
+; Get onboard page with data and convert to string.
+$data = InetRead ("http://veolia.internet--access.net:8105/oxmap_ajax", 1)
+$data = BinaryToString($data)
+; Split out the speed data (the data is resported in m/s):
+$datadelar = StringSplit ($data, "</SpeedOverGround>",1)
+$datadelar2 = StringSplit ($datadelar[1] , '<SpeedOverGround>',1)
+; Update the data in the GUI.
+GUICtrlSetData($baar, Int(Number($datadelar2[2])*0.926))
+GUICtrlSetData($text, Int(Number($datadelar2[2])*1.852) & " Km/h")
+; Sleep for 2 sec before next fetch.
+sleep(2000)
+WEnd
+
 ; Main function loop
 While 1
 ; Get onboard page with data and convert to string.
