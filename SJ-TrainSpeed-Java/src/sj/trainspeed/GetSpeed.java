@@ -59,8 +59,8 @@ public class GetSpeed{
             System.out.println("Error: "+e.getMessage());
         }
         
-        NodeList speeds = doc.getElementsByTagName("speed"); 
-        Double speedms = Double.parseDouble(speeds.item(0).getTextContent())*3.6;
+        NodeList speeds = doc.getElementsByTagName("SpeedOverGround"); 
+        Double speedms = Double.parseDouble(speeds.item(0).getTextContent())*1.852;
         speed = speedms.intValue();
         
         return speed;
