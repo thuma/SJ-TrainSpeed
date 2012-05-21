@@ -47,10 +47,13 @@ public class GetSpeed{
     public int getSpeed(){
   
     try{
+    // Connect
     conn = url.openConnection();
     builder = factory.newDocumentBuilder();
+    // Read the data into the XML document.
     doc = builder.parse(conn.getInputStream());
     
+    // Check for errors.
      } catch (IOException | SAXException | ParserConfigurationException all) {
     System.out.println("Error: "+all.getMessage());
     return -9999;
