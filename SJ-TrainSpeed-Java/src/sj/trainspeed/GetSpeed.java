@@ -24,45 +24,45 @@ import org.xml.sax.SAXException;
  */
 public class GetSpeed{
 
+    private String tagname;
     private String urlString;
+    private Double speedfactor;
     private URL url;
     private URLConnection conn;
     private DocumentBuilder builder;
     private Document doc;
     private int speed;
- 
-    GetSpeed(String inurl){
-    this.urlString = inurl; 
+    private DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+    
+    GetSpeed(String inurl, String tagname, Double speedfactor){
+        this.tagname = tagname;
+        this.speedfactor = speedfactor;
+        try {
+            this.url = new URL(inurl);
+        } catch (MalformedURLException urlerror) {
+            System.out.println("URL malformed: "+urlerror.getMessage());
+        }
     }
     
-    public int getSpeed() throws IOException{
-        
+    public int getSpeed(){
+  
     try{
-    url = new URL(urlString);
-    } catch (MalformedURLException e) {
-    System.out.println("Error: "+e.getMessage());
-    }
-      try{
     conn = url.openConnection();
-     } catch (MalformedURLException e) {
-    System.out.println("Error: "+e.getMessage());
-    }
-    DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-        try {
-            builder = factory.newDocumentBuilder();
-        } catch (ParserConfigurationException e) {
-            System.out.println("Error: "+e.getMessage());
-        }
-        try {
-            doc = builder.parse(conn.getInputStream());
-        } catch (SAXException e) {
-            System.out.println("Error: "+e.getMessage());
-        }
-        
-        NodeList speeds = doc.getElementsByTagName("SpeedOverGround"); 
-        Double speedms = Double.parseDouble(speeds.item(0).getTextContent())*1.852;
+    builder = factory.newDocumentBuilder();
+    doc = builder.parse(conn.getInputStream());
+    
+     } catch (IOException | SAXException | ParserConfigurationException all) {
+    System.out.println("Error: "+all.getMessage());
+    return -9999;
+    }   
+        // Look for tagname:
+        NodeList speeds = doc.getElementsByTagName(tagname); 
+        // The speed data is a float, and it is in knots.
+        // To make the speed to km/h mulitiplyby the knots ratio (1,852km/h/knot)
+        Double speedms = Double.parseDouble(speeds.item(0).getTextContent())*speedfactor;
+        // change to int. No round.
         speed = speedms.intValue();
-        
+        // return speed
         return speed;
         }
     }
