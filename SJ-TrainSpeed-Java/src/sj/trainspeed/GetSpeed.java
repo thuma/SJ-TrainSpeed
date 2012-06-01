@@ -4,13 +4,10 @@
  */
 package sj.trainspeed;
 
-
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.w3c.dom.Document;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -33,7 +30,7 @@ public class GetSpeed{
     private Document doc;
     private int speed;
     private DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-    
+        
     GetSpeed(String inurl, String tagname, Double speedfactor){
         this.tagname = tagname;
         this.speedfactor = speedfactor;
@@ -44,8 +41,10 @@ public class GetSpeed{
         }
     }
     
-    public int getSpeed(){
-  
+    /**
+     * @return Data as String 
+     */
+    public String getRaw(){
     try{
     // Connect
     conn = url.openConnection();
@@ -56,19 +55,36 @@ public class GetSpeed{
     // Check for errors.
      } catch (IOException | SAXException | ParserConfigurationException all) {
     System.out.println("Error: "+all.getMessage());
-    return -9999;
+    return "";
     }   
         // Look for tagname:
         NodeList speeds = doc.getElementsByTagName(tagname); 
         // The speed data is a float, and it is in knots.
         // To make the speed to km/h mulitiplyby the knots ratio (1,852km/h/knot)
-        Double speedms = Double.parseDouble(speeds.item(0).getTextContent())*speedfactor;
+        return speeds.item(0).getTextContent();
+    }
+    
+    /**
+     * @return speed as Int 
+     */
+    public int getSpeed(){
+        if(this.tagname.equals("")){
+        return -55;
+        }
+        else{
+        // Look for tagname:
+        NodeList speeds = doc.getElementsByTagName(tagname); 
+        // The speed data is a float, and it is in knots.
+        // To make the speed to km/h mulitiplyby the knots ratio (1,852km/h/knot)
+        Double speedms = Double.parseDouble(this.getRaw())*speedfactor;
         // change to int. No round.
         speed = speedms.intValue();
         // return speed
         return speed;
         }
     }
+    
+}
 
 
 

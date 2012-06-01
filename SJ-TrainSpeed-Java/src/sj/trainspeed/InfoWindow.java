@@ -11,9 +11,14 @@ package sj.trainspeed;
 public class InfoWindow extends javax.swing.JFrame {
     
     public void setSpeed(int speed){
-    speedbar.setValue(speed);
-    speedtext.setText(String.valueOf(speed)+" km/h");
-    
+        if(speed == -55){
+        speedbar.setValue(0);
+        speedtext.setText("Ingen GPS hittad.");
+        }
+        else{
+        speedbar.setValue(speed);
+        speedtext.setText(String.valueOf(speed)+" km/h");
+        }
     }
 
     /**
