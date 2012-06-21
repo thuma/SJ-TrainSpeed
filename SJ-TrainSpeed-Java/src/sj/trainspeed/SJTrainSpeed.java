@@ -34,7 +34,6 @@ public class SJTrainSpeed {
      while(true){
      
      userwindow.setSpeed(getter.getSpeed());
-     System.out.println("Så!");
      try{Thread.sleep(2000);} catch(InterruptedException e){};
      
      }

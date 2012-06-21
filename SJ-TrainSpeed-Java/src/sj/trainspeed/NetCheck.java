@@ -27,7 +27,7 @@ import org.xml.sax.SAXException;
 public class NetCheck {
     private String netname;
     private boolean sj = true;
-    private boolean veolia = true;
+    private boolean veolia = false;
     private DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
     private URL veoliaurl;
     private URLConnection conn;
@@ -45,16 +45,19 @@ public class NetCheck {
         } catch (UnknownHostException ex) {
                 sj = false;
         }
+
         
         datainfo =  new GetSpeed("http://veolia.internet--access.net:8105/oxmap_ajax","title",1.0);
                                           
         if (datainfo.getRaw().equals("403 Forbidden")){
             veolia = false;
+             System.out.println("Fel");
         }
         if (datainfo.getSpeed() > -1){
             veolia = true;
         }
-   System.out.println("Såd");
+        
+
         if(sj) {
           datainfo = new GetSpeed("http://www.ombord.info/api/xml/position/", "speed", 3.6);
           if (datainfo.getSpeed()> -1){

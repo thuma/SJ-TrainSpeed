@@ -54,8 +54,8 @@ public class GetSpeed{
     
     // Check for errors.
      } catch (IOException | SAXException | ParserConfigurationException all) {
-    System.out.println("Error: "+all.getMessage());
-    return "";
+    // System.out.println("Error: "+all.getMessage());
+    return "-99";
     }   
         // Look for tagname:
         NodeList speeds = doc.getElementsByTagName(tagname); 
@@ -72,8 +72,6 @@ public class GetSpeed{
         return -55;
         }
         else{
-        // Look for tagname:
-        NodeList speeds = doc.getElementsByTagName(tagname); 
         // The speed data is a float, and it is in knots.
         // To make the speed to km/h mulitiplyby the knots ratio (1,852km/h/knot)
         Double speedms = Double.parseDouble(this.getRaw())*speedfactor;
