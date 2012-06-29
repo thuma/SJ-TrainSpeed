@@ -61,7 +61,14 @@ public class GetSpeed{
         NodeList speeds = doc.getElementsByTagName(tagname); 
         // The speed data is a float, and it is in knots.
         // To make the speed to km/h mulitiplyby the knots ratio (1,852km/h/knot)
+
+        if(speeds.getLength()>0){
         return speeds.item(0).getTextContent();
+        }
+        else{
+        // System.out.println("Error: "+all.getMessage());
+        return "-99";  
+        }
     }
     
     /**
