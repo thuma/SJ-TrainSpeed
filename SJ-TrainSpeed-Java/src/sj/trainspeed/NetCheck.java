@@ -47,11 +47,11 @@ public class NetCheck {
         }
 
         
-        datainfo =  new GetSpeed("http://veolia.internet--access.net:8105/oxmap_ajax","title",1.0);
+        datainfo =  new GetSpeed("http://veolia.internet--access.net:8105/oxmap_ajax","SpeedOverGround",1.852);
                                           
-        if (datainfo.getRaw().equals("403 Forbidden")){
+        if (datainfo.getRaw().equals("-99")){
             veolia = false;
-             System.out.println("Fel");
+             //System.out.println("Fel");
         }
         if (datainfo.getSpeed() > -1){
             veolia = true;
